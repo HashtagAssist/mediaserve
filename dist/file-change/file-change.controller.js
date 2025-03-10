@@ -23,101 +23,133 @@ let FileChangeController = class FileChangeController {
         this.fileChangeService = fileChangeService;
         this.logger = logger;
     }
-    async findAll(limit, offset, type, status) {
-        this.logger.debug(`Rufe Dateiänderungen ab: limit=${limit}, offset=${offset}, type=${type}, status=${status}`, 'FileChangeController');
-        return this.fileChangeService.findAll(limit, offset, type, status);
+    findAll(status, type) {
+        this.logger.debug('Abrufen aller Dateiänderungen', 'FileChangeController');
+        return this.fileChangeService.findAll(status, type);
     }
-    async processChanges(body) {
-        this.logger.debug(`Verarbeite Dateiänderungen${body.libraryId ? ` für Bibliothek ${body.libraryId}` : ''}`, 'FileChangeController');
-        const result = await this.fileChangeService.processChanges(body.libraryId);
-        return Object.assign({ message: 'Dateiänderungen erfolgreich verarbeitet' }, result);
+    findOne(id) {
+        this.logger.debug(`Abrufen der Dateiänderung mit ID: ${id}`, 'FileChangeController');
+        return this.fileChangeService.findOne(id);
+    }
+    detectChanges(id) {
+        this.logger.debug(`Erkennen von Dateiänderungen für Bibliothek ${id}`, 'FileChangeController');
+        return this.fileChangeService.detectChangesForLibrary(id);
+    }
+    process(id) {
+        this.logger.debug(`Verarbeiten der Dateiänderung mit ID: ${id}`, 'FileChangeController');
+        return this.fileChangeService.processChange(id);
     }
 };
 exports.FileChangeController = FileChangeController;
 __decorate([
     (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({
-        summary: 'Dateiänderungen abrufen',
-        description: 'Ruft eine Liste von Dateiänderungen mit Paginierung ab'
-    }),
-    (0, swagger_1.ApiQuery)({ name: 'limit', required: false, description: 'Anzahl der Ergebnisse pro Seite', type: Number }),
-    (0, swagger_1.ApiQuery)({ name: 'offset', required: false, description: 'Seitenversatz für Paginierung', type: Number }),
-    (0, swagger_1.ApiQuery)({ name: 'type', required: false, description: 'Typ der Änderung (added, modified, deleted)' }),
-    (0, swagger_1.ApiQuery)({ name: 'status', required: false, description: 'Status der Änderung (pending, processed, failed)' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Alle Dateiänderungen abrufen' }),
+    (0, swagger_1.ApiQuery)({ name: 'status', required: false, enum: ['pending', 'processed', 'failed'] }),
+    (0, swagger_1.ApiQuery)({ name: 'type', required: false, enum: ['added', 'modified', 'deleted'] }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Liste der Dateiänderungen',
+        description: 'Liste aller Dateiänderungen',
         schema: {
-            type: 'object',
-            properties: {
-                total: { type: 'number', example: 42 },
-                items: {
-                    type: 'array',
-                    items: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    id: { type: 'string', format: 'uuid' },
+                    path: { type: 'string' },
+                    type: { type: 'string', enum: ['added', 'modified', 'deleted'] },
+                    status: { type: 'string', enum: ['pending', 'processed', 'failed'] },
+                    errorMessage: { type: 'string', nullable: true },
+                    library: {
                         type: 'object',
                         properties: {
-                            id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000' },
-                            path: { type: 'string', example: '/pfad/zur/datei.mp4' },
-                            type: { type: 'string', example: 'added' },
-                            status: { type: 'string', example: 'pending' },
-                            libraryId: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440001' },
-                            createdAt: { type: 'string', format: 'date-time', example: '2025-03-10T12:00:00Z' }
+                            id: { type: 'string', format: 'uuid' },
+                            name: { type: 'string' },
                         }
-                    }
+                    },
+                    createdAt: { type: 'string', format: 'date-time' },
+                    updatedAt: { type: 'string', format: 'date-time' },
                 }
             }
         }
     }),
-    (0, swagger_1.ApiResponse)({ status: 401, description: 'Nicht autorisiert' }),
-    __param(0, (0, common_1.Query)('limit', new common_1.DefaultValuePipe(20), common_1.ParseIntPipe)),
-    __param(1, (0, common_1.Query)('offset', new common_1.DefaultValuePipe(0), common_1.ParseIntPipe)),
-    __param(2, (0, common_1.Query)('type')),
-    __param(3, (0, common_1.Query)('status')),
+    __param(0, (0, common_1.Query)('status')),
+    __param(1, (0, common_1.Query)('type')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Number, String, String]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
 ], FileChangeController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Post)('process'),
-    (0, swagger_1.ApiOperation)({
-        summary: 'Dateiänderungen verarbeiten',
-        description: 'Verarbeitet ausstehende Dateiänderungen'
-    }),
-    (0, swagger_1.ApiBody)({
-        schema: {
-            type: 'object',
-            properties: {
-                libraryId: {
-                    type: 'string',
-                    example: '550e8400-e29b-41d4-a716-446655440000',
-                    description: 'Optional: Nur Änderungen für eine bestimmte Bibliothek verarbeiten'
-                }
-            },
-            required: []
-        }
-    }),
+    (0, common_1.Get)(':id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Dateiänderung nach ID abrufen' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Dateiänderungs-ID', type: 'string', format: 'uuid' }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Dateiänderungen erfolgreich verarbeitet',
+        description: 'Dateiänderung gefunden',
         schema: {
             type: 'object',
             properties: {
-                message: { type: 'string', example: 'Dateiänderungen erfolgreich verarbeitet' },
-                processed: { type: 'number', example: 5 },
-                failed: { type: 'number', example: 0 }
+                id: { type: 'string', format: 'uuid' },
+                path: { type: 'string' },
+                type: { type: 'string', enum: ['added', 'modified', 'deleted'] },
+                status: { type: 'string', enum: ['pending', 'processed', 'failed'] },
+                errorMessage: { type: 'string', nullable: true },
+                library: {
+                    type: 'object',
+                    properties: {
+                        id: { type: 'string', format: 'uuid' },
+                        name: { type: 'string' },
+                        path: { type: 'string' },
+                    }
+                },
+                createdAt: { type: 'string', format: 'date-time' },
+                updatedAt: { type: 'string', format: 'date-time' },
             }
         }
     }),
-    (0, swagger_1.ApiResponse)({ status: 401, description: 'Nicht autorisiert' }),
-    __param(0, (0, common_1.Body)()),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Dateiänderung nicht gefunden' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], FileChangeController.prototype, "processChanges", null);
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], FileChangeController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Post)('libraries/:id/detect'),
+    (0, swagger_1.ApiOperation)({ summary: 'Dateiänderungen für eine Bibliothek erkennen' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Bibliotheks-ID', type: 'string', format: 'uuid' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Erkannte Änderungen',
+        schema: {
+            type: 'object',
+            properties: {
+                added: { type: 'array', items: { type: 'string' } },
+                modified: { type: 'array', items: { type: 'string' } },
+                deleted: { type: 'array', items: { type: 'string' } },
+            }
+        }
+    }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Bibliothek nicht gefunden' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], FileChangeController.prototype, "detectChanges", null);
+__decorate([
+    (0, common_1.Post)(':id/process'),
+    (0, swagger_1.ApiOperation)({ summary: 'Dateiänderung verarbeiten' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Dateiänderungs-ID', type: 'string', format: 'uuid' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Dateiänderung wurde verarbeitet' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Dateiänderung nicht gefunden' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], FileChangeController.prototype, "process", null);
 exports.FileChangeController = FileChangeController = __decorate([
-    (0, swagger_1.ApiTags)('Dateiänderungen'),
-    (0, common_1.Controller)('file-changes'),
+    (0, swagger_1.ApiTags)('File Changes'),
+    (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Controller)('file-changes'),
     __metadata("design:paramtypes", [file_change_service_1.FileChangeService,
         logger_service_1.LoggerService])
 ], FileChangeController);

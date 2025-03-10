@@ -10,13 +10,12 @@ export declare class CategoryController {
     findAll(): Promise<import("./entities/category.entity").Category[]>;
     findOne(id: string): Promise<import("./entities/category.entity").Category>;
     update(id: string, updateCategoryDto: UpdateCategoryDto): Promise<import("./entities/category.entity").Category>;
-    remove(id: string): Promise<{
-        message: string;
-    }>;
+    remove(id: string): Promise<void>;
     addMedia(id: string, mediaId: string): Promise<{
         message: string;
     }>;
     removeMedia(id: string, mediaId: string): Promise<{
         message: string;
     }>;
+    categorizeMedia(id: string): Promise<string[]>;
 }

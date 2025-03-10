@@ -14,11 +14,12 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { LoggerService } from '../shared/services/logger.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody, ApiBearerAuth } from '@nestjs/swagger';
 
-@ApiTags('Kategorien')
-@Controller('categories')
+@ApiTags('Categories')
+@ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
+@Controller('categories')
 export class CategoryController {
   constructor(
     private readonly categoryService: CategoryService,
@@ -27,33 +28,21 @@ export class CategoryController {
 
   @Post()
   @ApiOperation({ summary: 'Neue Kategorie erstellen' })
-  @ApiBody({ 
-    type: CreateCategoryDto,
-    examples: {
-      'Neue Kategorie': {
-        value: {
-          name: 'Action',
-          description: 'Actionfilme und -serien'
-        }
-      }
-    }
-  })
   @ApiResponse({ 
     status: 201, 
-    description: 'Kategorie erfolgreich erstellt',
+    description: 'Kategorie wurde erstellt',
     schema: {
       type: 'object',
       properties: {
-        id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000' },
-        name: { type: 'string', example: 'Action' },
-        description: { type: 'string', example: 'Actionfilme und -serien' },
-        createdAt: { type: 'string', format: 'date-time', example: '2025-03-10T12:00:00Z' }
+        id: { type: 'string', format: 'uuid' },
+        name: { type: 'string' },
+        description: { type: 'string', nullable: true },
+        createdAt: { type: 'string', format: 'date-time' },
+        updatedAt: { type: 'string', format: 'date-time' },
       }
     }
   })
-  @ApiResponse({ status: 400, description: 'Ungültige Daten' })
-  @ApiResponse({ status: 401, description: 'Nicht autorisiert' })
-  async create(@Body() createCategoryDto: CreateCategoryDto) {
+  create(@Body() createCategoryDto: CreateCategoryDto) {
     this.logger.debug(`Erstelle neue Kategorie: ${createCategoryDto.name}`, 'CategoryController');
     return this.categoryService.create(createCategoryDto);
   }
@@ -68,112 +57,74 @@ export class CategoryController {
       items: {
         type: 'object',
         properties: {
-          id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000' },
-          name: { type: 'string', example: 'Action' },
-          description: { type: 'string', example: 'Actionfilme und -serien' },
-          mediaCount: { type: 'number', example: 42 },
-          createdAt: { type: 'string', format: 'date-time', example: '2025-03-10T12:00:00Z' }
+          id: { type: 'string', format: 'uuid' },
+          name: { type: 'string' },
+          description: { type: 'string', nullable: true },
+          createdAt: { type: 'string', format: 'date-time' },
+          updatedAt: { type: 'string', format: 'date-time' },
         }
       }
     }
   })
-  @ApiResponse({ status: 401, description: 'Nicht autorisiert' })
-  async findAll() {
-    this.logger.debug('Rufe alle Kategorien ab', 'CategoryController');
+  findAll() {
+    this.logger.debug('Abrufen aller Kategorien', 'CategoryController');
     return this.categoryService.findAll();
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Eine Kategorie abrufen' })
-  @ApiParam({ name: 'id', description: 'ID der Kategorie', type: 'string' })
+  @ApiOperation({ summary: 'Kategorie nach ID abrufen' })
+  @ApiParam({ name: 'id', description: 'Kategorie-ID', type: 'string', format: 'uuid' })
   @ApiResponse({ 
     status: 200, 
-    description: 'Die gefundene Kategorie',
+    description: 'Kategorie gefunden',
     schema: {
       type: 'object',
       properties: {
-        id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000' },
-        name: { type: 'string', example: 'Action' },
-        description: { type: 'string', example: 'Actionfilme und -serien' },
-        media: {
-          type: 'array',
-          items: {
+        id: { type: 'string', format: 'uuid' },
+        name: { type: 'string' },
+        description: { type: 'string', nullable: true },
+        media: { 
+          type: 'array', 
+          items: { 
             type: 'object',
             properties: {
-              id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440001' },
-              title: { type: 'string', example: 'Beispielfilm' },
-              thumbnailPath: { type: 'string', example: '/pfad/zum/thumbnail.jpg' }
+              id: { type: 'string', format: 'uuid' },
+              title: { type: 'string' },
             }
-          }
+          } 
         },
-        createdAt: { type: 'string', format: 'date-time', example: '2025-03-10T12:00:00Z' }
+        createdAt: { type: 'string', format: 'date-time' },
+        updatedAt: { type: 'string', format: 'date-time' },
       }
     }
   })
-  @ApiResponse({ status: 401, description: 'Nicht autorisiert' })
   @ApiResponse({ status: 404, description: 'Kategorie nicht gefunden' })
-  async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    this.logger.debug(`Rufe Kategorie ab: ${id}`, 'CategoryController');
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
+    this.logger.debug(`Abrufen der Kategorie mit ID: ${id}`, 'CategoryController');
     return this.categoryService.findOne(id);
   }
 
   @Put(':id')
   @ApiOperation({ summary: 'Kategorie aktualisieren' })
-  @ApiParam({ name: 'id', description: 'ID der Kategorie', type: 'string' })
-  @ApiBody({ 
-    type: UpdateCategoryDto,
-    examples: {
-      'Kategorie aktualisieren': {
-        value: {
-          name: 'Action & Abenteuer',
-          description: 'Action- und Abenteuerfilme'
-        }
-      }
-    }
-  })
-  @ApiResponse({ 
-    status: 200, 
-    description: 'Kategorie erfolgreich aktualisiert',
-    schema: {
-      type: 'object',
-      properties: {
-        id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000' },
-        name: { type: 'string', example: 'Action & Abenteuer' },
-        description: { type: 'string', example: 'Action- und Abenteuerfilme' },
-        updatedAt: { type: 'string', format: 'date-time', example: '2025-03-10T12:00:00Z' }
-      }
-    }
-  })
-  @ApiResponse({ status: 400, description: 'Ungültige Daten' })
-  @ApiResponse({ status: 401, description: 'Nicht autorisiert' })
+  @ApiParam({ name: 'id', description: 'Kategorie-ID', type: 'string', format: 'uuid' })
+  @ApiResponse({ status: 200, description: 'Kategorie wurde aktualisiert' })
   @ApiResponse({ status: 404, description: 'Kategorie nicht gefunden' })
-  async update(
+  update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
-    this.logger.debug(`Aktualisiere Kategorie: ${id}`, 'CategoryController');
+    this.logger.debug(`Aktualisiere Kategorie mit ID: ${id}`, 'CategoryController');
     return this.categoryService.update(id, updateCategoryDto);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Kategorie löschen' })
-  @ApiParam({ name: 'id', description: 'ID der Kategorie', type: 'string' })
-  @ApiResponse({ 
-    status: 200, 
-    description: 'Kategorie erfolgreich gelöscht',
-    schema: {
-      type: 'object',
-      properties: {
-        message: { type: 'string', example: 'Kategorie erfolgreich gelöscht' }
-      }
-    }
-  })
-  @ApiResponse({ status: 401, description: 'Nicht autorisiert' })
+  @ApiParam({ name: 'id', description: 'Kategorie-ID', type: 'string', format: 'uuid' })
+  @ApiResponse({ status: 200, description: 'Kategorie wurde gelöscht' })
   @ApiResponse({ status: 404, description: 'Kategorie nicht gefunden' })
-  async remove(@Param('id', ParseUUIDPipe) id: string) {
-    this.logger.debug(`Lösche Kategorie: ${id}`, 'CategoryController');
-    await this.categoryService.remove(id);
-    return { message: 'Kategorie erfolgreich gelöscht' };
+  remove(@Param('id', ParseUUIDPipe) id: string) {
+    this.logger.debug(`Lösche Kategorie mit ID: ${id}`, 'CategoryController');
+    return this.categoryService.remove(id);
   }
 
   @Post(':id/media/:mediaId')
@@ -224,5 +175,15 @@ export class CategoryController {
     this.logger.debug(`Entferne Medium ${mediaId} aus Kategorie ${id}`, 'CategoryController');
     await this.categoryService.removeMedia(id, mediaId);
     return { message: 'Medium erfolgreich aus Kategorie entfernt' };
+  }
+
+  @Post('media/:id/categorize')
+  @ApiOperation({ summary: 'Medium automatisch kategorisieren' })
+  @ApiParam({ name: 'id', description: 'Medien-ID', type: 'string', format: 'uuid' })
+  @ApiResponse({ status: 200, description: 'Medium wurde kategorisiert' })
+  @ApiResponse({ status: 404, description: 'Medium nicht gefunden' })
+  categorizeMedia(@Param('id', ParseUUIDPipe) id: string) {
+    this.logger.debug(`Kategorisiere Medium mit ID: ${id}`, 'CategoryController');
+    return this.categoryService.categorizeMedia(id);
   }
 } 

@@ -3,16 +3,16 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCategoryDto {
   @ApiProperty({
-    description: 'Name der Kategorie',
-    example: 'Action'
+    description: 'Der Name der Kategorie',
+    example: 'Action',
   })
   @IsString()
   name: string;
 
   @ApiProperty({
-    description: 'Beschreibung der Kategorie',
-    example: 'Actionfilme und -serien',
-    required: false
+    description: 'Eine optionale Beschreibung der Kategorie',
+    example: 'Filme mit viel Action und Spannung',
+    required: false,
   })
   @IsString()
   @IsOptional()

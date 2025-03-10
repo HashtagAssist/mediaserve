@@ -4,18 +4,17 @@ export declare class SchedulerController {
     private readonly schedulerService;
     private readonly logger;
     constructor(schedulerService: SchedulerService, logger: LoggerService);
-    getScheduledJobs(): {
-        libraryId: string;
-        jobName: string;
-        nextRun: Date;
-    }[];
+    getJobs(): Promise<any>;
+    runJob(id: string): Promise<{
+        message: string;
+    }>;
+    triggerLibraryScan(id: string): Promise<{
+        message: string;
+    }>;
     scheduleLibraryScan(id: string, scheduleOptions?: {
         cronExpression?: string;
     }): Promise<{
         message: string;
         success: boolean;
-    }>;
-    triggerLibraryScan(id: string): Promise<{
-        message: string;
     }>;
 }

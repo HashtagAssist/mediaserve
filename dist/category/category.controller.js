@@ -25,26 +25,25 @@ let CategoryController = class CategoryController {
         this.categoryService = categoryService;
         this.logger = logger;
     }
-    async create(createCategoryDto) {
+    create(createCategoryDto) {
         this.logger.debug(`Erstelle neue Kategorie: ${createCategoryDto.name}`, 'CategoryController');
         return this.categoryService.create(createCategoryDto);
     }
-    async findAll() {
-        this.logger.debug('Rufe alle Kategorien ab', 'CategoryController');
+    findAll() {
+        this.logger.debug('Abrufen aller Kategorien', 'CategoryController');
         return this.categoryService.findAll();
     }
-    async findOne(id) {
-        this.logger.debug(`Rufe Kategorie ab: ${id}`, 'CategoryController');
+    findOne(id) {
+        this.logger.debug(`Abrufen der Kategorie mit ID: ${id}`, 'CategoryController');
         return this.categoryService.findOne(id);
     }
-    async update(id, updateCategoryDto) {
-        this.logger.debug(`Aktualisiere Kategorie: ${id}`, 'CategoryController');
+    update(id, updateCategoryDto) {
+        this.logger.debug(`Aktualisiere Kategorie mit ID: ${id}`, 'CategoryController');
         return this.categoryService.update(id, updateCategoryDto);
     }
-    async remove(id) {
-        this.logger.debug(`Lösche Kategorie: ${id}`, 'CategoryController');
-        await this.categoryService.remove(id);
-        return { message: 'Kategorie erfolgreich gelöscht' };
+    remove(id) {
+        this.logger.debug(`Lösche Kategorie mit ID: ${id}`, 'CategoryController');
+        return this.categoryService.remove(id);
     }
     async addMedia(id, mediaId) {
         this.logger.debug(`Füge Medium ${mediaId} zur Kategorie ${id} hinzu`, 'CategoryController');
@@ -56,41 +55,33 @@ let CategoryController = class CategoryController {
         await this.categoryService.removeMedia(id, mediaId);
         return { message: 'Medium erfolgreich aus Kategorie entfernt' };
     }
+    categorizeMedia(id) {
+        this.logger.debug(`Kategorisiere Medium mit ID: ${id}`, 'CategoryController');
+        return this.categoryService.categorizeMedia(id);
+    }
 };
 exports.CategoryController = CategoryController;
 __decorate([
     (0, common_1.Post)(),
     (0, swagger_1.ApiOperation)({ summary: 'Neue Kategorie erstellen' }),
-    (0, swagger_1.ApiBody)({
-        type: create_category_dto_1.CreateCategoryDto,
-        examples: {
-            'Neue Kategorie': {
-                value: {
-                    name: 'Action',
-                    description: 'Actionfilme und -serien'
-                }
-            }
-        }
-    }),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'Kategorie erfolgreich erstellt',
+        description: 'Kategorie wurde erstellt',
         schema: {
             type: 'object',
             properties: {
-                id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000' },
-                name: { type: 'string', example: 'Action' },
-                description: { type: 'string', example: 'Actionfilme und -serien' },
-                createdAt: { type: 'string', format: 'date-time', example: '2025-03-10T12:00:00Z' }
+                id: { type: 'string', format: 'uuid' },
+                name: { type: 'string' },
+                description: { type: 'string', nullable: true },
+                createdAt: { type: 'string', format: 'date-time' },
+                updatedAt: { type: 'string', format: 'date-time' },
             }
         }
     }),
-    (0, swagger_1.ApiResponse)({ status: 400, description: 'Ungültige Daten' }),
-    (0, swagger_1.ApiResponse)({ status: 401, description: 'Nicht autorisiert' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_category_dto_1.CreateCategoryDto]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], CategoryController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
@@ -103,112 +94,75 @@ __decorate([
             items: {
                 type: 'object',
                 properties: {
-                    id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000' },
-                    name: { type: 'string', example: 'Action' },
-                    description: { type: 'string', example: 'Actionfilme und -serien' },
-                    mediaCount: { type: 'number', example: 42 },
-                    createdAt: { type: 'string', format: 'date-time', example: '2025-03-10T12:00:00Z' }
+                    id: { type: 'string', format: 'uuid' },
+                    name: { type: 'string' },
+                    description: { type: 'string', nullable: true },
+                    createdAt: { type: 'string', format: 'date-time' },
+                    updatedAt: { type: 'string', format: 'date-time' },
                 }
             }
         }
     }),
-    (0, swagger_1.ApiResponse)({ status: 401, description: 'Nicht autorisiert' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], CategoryController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Eine Kategorie abrufen' }),
-    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID der Kategorie', type: 'string' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Kategorie nach ID abrufen' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Kategorie-ID', type: 'string', format: 'uuid' }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Die gefundene Kategorie',
+        description: 'Kategorie gefunden',
         schema: {
             type: 'object',
             properties: {
-                id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000' },
-                name: { type: 'string', example: 'Action' },
-                description: { type: 'string', example: 'Actionfilme und -serien' },
+                id: { type: 'string', format: 'uuid' },
+                name: { type: 'string' },
+                description: { type: 'string', nullable: true },
                 media: {
                     type: 'array',
                     items: {
                         type: 'object',
                         properties: {
-                            id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440001' },
-                            title: { type: 'string', example: 'Beispielfilm' },
-                            thumbnailPath: { type: 'string', example: '/pfad/zum/thumbnail.jpg' }
+                            id: { type: 'string', format: 'uuid' },
+                            title: { type: 'string' },
                         }
                     }
                 },
-                createdAt: { type: 'string', format: 'date-time', example: '2025-03-10T12:00:00Z' }
+                createdAt: { type: 'string', format: 'date-time' },
+                updatedAt: { type: 'string', format: 'date-time' },
             }
         }
     }),
-    (0, swagger_1.ApiResponse)({ status: 401, description: 'Nicht autorisiert' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Kategorie nicht gefunden' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], CategoryController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Put)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Kategorie aktualisieren' }),
-    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID der Kategorie', type: 'string' }),
-    (0, swagger_1.ApiBody)({
-        type: update_category_dto_1.UpdateCategoryDto,
-        examples: {
-            'Kategorie aktualisieren': {
-                value: {
-                    name: 'Action & Abenteuer',
-                    description: 'Action- und Abenteuerfilme'
-                }
-            }
-        }
-    }),
-    (0, swagger_1.ApiResponse)({
-        status: 200,
-        description: 'Kategorie erfolgreich aktualisiert',
-        schema: {
-            type: 'object',
-            properties: {
-                id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000' },
-                name: { type: 'string', example: 'Action & Abenteuer' },
-                description: { type: 'string', example: 'Action- und Abenteuerfilme' },
-                updatedAt: { type: 'string', format: 'date-time', example: '2025-03-10T12:00:00Z' }
-            }
-        }
-    }),
-    (0, swagger_1.ApiResponse)({ status: 400, description: 'Ungültige Daten' }),
-    (0, swagger_1.ApiResponse)({ status: 401, description: 'Nicht autorisiert' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Kategorie-ID', type: 'string', format: 'uuid' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Kategorie wurde aktualisiert' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Kategorie nicht gefunden' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, update_category_dto_1.UpdateCategoryDto]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], CategoryController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Kategorie löschen' }),
-    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID der Kategorie', type: 'string' }),
-    (0, swagger_1.ApiResponse)({
-        status: 200,
-        description: 'Kategorie erfolgreich gelöscht',
-        schema: {
-            type: 'object',
-            properties: {
-                message: { type: 'string', example: 'Kategorie erfolgreich gelöscht' }
-            }
-        }
-    }),
-    (0, swagger_1.ApiResponse)({ status: 401, description: 'Nicht autorisiert' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Kategorie-ID', type: 'string', format: 'uuid' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Kategorie wurde gelöscht' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Kategorie nicht gefunden' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], CategoryController.prototype, "remove", null);
 __decorate([
     (0, common_1.Post)(':id/media/:mediaId'),
@@ -256,10 +210,22 @@ __decorate([
     __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "removeMedia", null);
+__decorate([
+    (0, common_1.Post)('media/:id/categorize'),
+    (0, swagger_1.ApiOperation)({ summary: 'Medium automatisch kategorisieren' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Medien-ID', type: 'string', format: 'uuid' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Medium wurde kategorisiert' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Medium nicht gefunden' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], CategoryController.prototype, "categorizeMedia", null);
 exports.CategoryController = CategoryController = __decorate([
-    (0, swagger_1.ApiTags)('Kategorien'),
-    (0, common_1.Controller)('categories'),
+    (0, swagger_1.ApiTags)('Categories'),
+    (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Controller)('categories'),
     __metadata("design:paramtypes", [category_service_1.CategoryService,
         logger_service_1.LoggerService])
 ], CategoryController);

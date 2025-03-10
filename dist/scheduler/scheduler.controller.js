@@ -23,9 +23,19 @@ let SchedulerController = class SchedulerController {
         this.schedulerService = schedulerService;
         this.logger = logger;
     }
-    getScheduledJobs() {
-        this.logger.debug('Rufe geplante Jobs ab', 'SchedulerController');
-        return this.schedulerService.getScheduledJobs();
+    async getJobs() {
+        this.logger.debug('Abrufen aller geplanten Jobs', 'SchedulerController');
+        return this.schedulerService.getJobs();
+    }
+    async runJob(id) {
+        this.logger.debug(`Manuelles Ausführen des Jobs ${id}`, 'SchedulerController');
+        await this.schedulerService.runJob(id);
+        return { message: 'Job gestartet' };
+    }
+    async triggerLibraryScan(id) {
+        this.logger.debug(`Manueller Scan für Bibliothek ${id} ausgelöst`, 'SchedulerController');
+        await this.schedulerService.scanLibrary(id);
+        return { message: 'Scan gestartet' };
     }
     async scheduleLibraryScan(id, scheduleOptions) {
         this.logger.debug(`Plane Scan für Bibliothek ${id} ${(scheduleOptions === null || scheduleOptions === void 0 ? void 0 : scheduleOptions.cronExpression) ? `(${scheduleOptions.cronExpression})` : ''}`, 'SchedulerController');
@@ -36,11 +46,6 @@ let SchedulerController = class SchedulerController {
                 : 'Scan konnte nicht geplant werden',
             success,
         };
-    }
-    async triggerLibraryScan(id) {
-        this.logger.debug(`Manueller Scan für Bibliothek ${id} ausgelöst`, 'SchedulerController');
-        await this.schedulerService.scanLibrary(id);
-        return { message: 'Scan gestartet' };
     }
 };
 exports.SchedulerController = SchedulerController;
@@ -55,31 +60,41 @@ __decorate([
             items: {
                 type: 'object',
                 properties: {
-                    id: { type: 'string', example: '550e8400-e29b-41d4-a716-446655440000' },
-                    name: { type: 'string', example: 'Bibliothek scannen' },
-                    type: { type: 'string', example: 'library-scan' },
-                    schedule: { type: 'string', example: '0 0 * * *' },
-                    enabled: { type: 'boolean', example: true },
-                    lastRun: {
-                        type: 'string',
-                        format: 'date-time',
-                        example: '2025-03-10T12:00:00Z',
-                        nullable: true
-                    },
-                    nextRun: {
-                        type: 'string',
-                        format: 'date-time',
-                        example: '2025-03-11T00:00:00Z'
-                    }
+                    id: { type: 'string' },
+                    name: { type: 'string' },
+                    nextRun: { type: 'string', format: 'date-time' },
+                    lastRun: { type: 'string', format: 'date-time', nullable: true },
+                    status: { type: 'string', enum: ['pending', 'running', 'completed', 'failed'] },
                 }
             }
         }
     }),
-    (0, swagger_1.ApiResponse)({ status: 401, description: 'Nicht autorisiert' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], SchedulerController.prototype, "getScheduledJobs", null);
+    __metadata("design:returntype", Promise)
+], SchedulerController.prototype, "getJobs", null);
+__decorate([
+    (0, common_1.Post)('jobs/:id/run'),
+    (0, swagger_1.ApiOperation)({ summary: 'Job manuell ausführen' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Job-ID', type: 'string' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Job wurde gestartet' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Job nicht gefunden' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], SchedulerController.prototype, "runJob", null);
+__decorate([
+    (0, common_1.Post)('libraries/:id/scan'),
+    (0, swagger_1.ApiOperation)({ summary: 'Bibliotheksscan manuell auslösen' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Bibliotheks-ID', type: 'string', format: 'uuid' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Scan wurde gestartet' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Bibliothek nicht gefunden' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], SchedulerController.prototype, "triggerLibraryScan", null);
 __decorate([
     (0, common_1.Post)('library/:id'),
     (0, swagger_1.ApiOperation)({ summary: 'Bibliotheksscan planen' }),
@@ -116,31 +131,11 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], SchedulerController.prototype, "scheduleLibraryScan", null);
-__decorate([
-    (0, common_1.Post)('scan/library/:id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Manuellen Bibliotheksscan auslösen' }),
-    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID der Bibliothek', type: 'string' }),
-    (0, swagger_1.ApiResponse)({
-        status: 200,
-        description: 'Scan gestartet',
-        schema: {
-            type: 'object',
-            properties: {
-                message: { type: 'string', example: 'Scan gestartet' }
-            }
-        }
-    }),
-    (0, swagger_1.ApiResponse)({ status: 401, description: 'Nicht autorisiert' }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Bibliothek nicht gefunden' }),
-    __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], SchedulerController.prototype, "triggerLibraryScan", null);
 exports.SchedulerController = SchedulerController = __decorate([
     (0, swagger_1.ApiTags)('Scheduler'),
-    (0, common_1.Controller)('scheduler'),
+    (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Controller)('scheduler'),
     __metadata("design:paramtypes", [scheduler_service_1.SchedulerService,
         logger_service_1.LoggerService])
 ], SchedulerController);
