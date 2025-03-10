@@ -1,0 +1,18 @@
+{
+    "sourceFile": "tsconfig.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741639951155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741639951155,
+            "name": "Commit-0",
+            "content": "{\n  \"compilerOptions\": {\n    \"module\": \"commonjs\",\n    \"declaration\": true,\n    \"removeComments\": true,\n    \"emitDecoratorMetadata\": true,\n    \"experimentalDecorators\": true,\n    \"allowSyntheticDefaultImports\": true,\n    \"target\": \"es2017\",\n    \"sourceMap\": true,\n    \"outDir\": \"mediaserver-frontend/dist\",\n    \"baseUrl\": \"./\",\n    \"incremental\": true,\n    \"skipLibCheck\": true,\n    \"strictNullChecks\": false,\n    \"noImplicitAny\": false,\n    \"strictBindCallApply\": false,\n    \"forceConsistentCasingInFileNames\": false,\n    \"noFallthroughCasesInSwitch\": false\n  }\n} "
+        }
+    ]
+}

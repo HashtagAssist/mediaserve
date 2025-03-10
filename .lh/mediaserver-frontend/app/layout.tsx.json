@@ -1,0 +1,18 @@
+{
+    "sourceFile": "mediaserver-frontend/app/layout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741638379025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741638379025,
+            "name": "Commit-0",
+            "content": "import type { Metadata } from \"next\";\nimport { Inter } from \"next/font/google\";\nimport \"./globals.css\";\nimport { Providers } from \"./providers\";\n\nconst inter = Inter({ subsets: [\"latin\"] });\n\nexport const metadata: Metadata = {\n  title: \"Medienserver\",\n  description: \"Ein moderner Medienserver für Ihre Mediensammlung\",\n};\n\nexport default function RootLayout({\n  children,\n}: Readonly<{\n  children: React.ReactNode;\n}>) {\n  return (\n    <html lang=\"de\" className=\"dark\">\n      <body className={inter.className}>\n        <Providers>{children}</Providers>\n      </body>\n    </html>\n  );\n} "
+        }
+    ]
+}

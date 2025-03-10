@@ -3,11 +3,23 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1741638155239,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741638853962,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,14 @@\n 'use client';\n \n import { QueryClient, QueryClientProvider } from '@tanstack/react-query';\n import { useState } from 'react';\n-import { Toaster } from '@/components/ui/toaster';\n \n export function Providers({ children }: { children: React.ReactNode }) {\n   const [queryClient] = useState(() => new QueryClient());\n \n   return (\n     <QueryClientProvider client={queryClient}>\n       {children}\n-      <Toaster />\n     </QueryClientProvider>\n   );\n } \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741638925070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,16 @@\n 'use client';\n \n import { QueryClient, QueryClientProvider } from '@tanstack/react-query';\n import { useState } from 'react';\n+import { Toaster } from '@/components/ui/toaster';\n \n export function Providers({ children }: { children: React.ReactNode }) {\n   const [queryClient] = useState(() => new QueryClient());\n \n   return (\n     <QueryClientProvider client={queryClient}>\n       {children}\n+      <Toaster />\n     </QueryClientProvider>\n   );\n } \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741639146335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,16 @@\n 'use client';\n \n import { QueryClient, QueryClientProvider } from '@tanstack/react-query';\n import { useState } from 'react';\n-import { Toaster } from '@/components/ui/toaster';\n+import { Toaster } from 'sonner';\n \n export function Providers({ children }: { children: React.ReactNode }) {\n   const [queryClient] = useState(() => new QueryClient());\n \n   return (\n     <QueryClientProvider client={queryClient}>\n       {children}\n-      <Toaster />\n+      <Toaster theme=\"dark\" position=\"top-right\" />\n     </QueryClientProvider>\n   );\n } \n\\ No newline at end of file\n"
                 }
             ],
             "date": 1741638155239,

@@ -1,20 +1,32 @@
 {
-    "sourceFile": "app/globals.css",
+    "sourceFile": "mediaserver-frontend/app/globals.css",
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 4,
             "patches": [
                 {
-                    "date": 1741638155239,
+                    "date": 1741638358479,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
                 },
                 {
-                    "date": 1741639146341,
+                    "date": 1741640137248,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,9 +71,9 @@\n }\n \n @layer base {\n   * {\n-    @apply border-border;\n+    @apply border-0;\n   }\n   body {\n     @apply bg-background text-foreground;\n   }\n"
+                },
+                {
+                    "date": 1741640364741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,10 @@\n @tailwind utilities;\n \n @layer base {\n   :root {\n-    --background: 224 71% 4%;\n-    --foreground: 213 31% 91%;\n+    --background: 0 0% 100%;\n+    --foreground: 222.2 84% 4.9%;\n \n     --muted: 223 47% 11%;\n     --muted-foreground: 215.4 16.3% 56.9%;\n \n@@ -35,11 +35,11 @@\n \n     --radius: 0.5rem;\n   }\n \n-  .light {\n-    --background: 0 0% 100%;\n-    --foreground: 222.2 47.4% 11.2%;\n+  .dark {\n+    --background: 222.2 84% 4.9%;\n+    --foreground: 210 40% 98%;\n \n     --muted: 210 40% 96.1%;\n     --muted-foreground: 215.4 16.3% 46.9%;\n \n"
+                },
+                {
+                    "date": 1741640720132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,7 +74,7 @@\n   * {\n     @apply border-0;\n   }\n   body {\n-    @apply bg-background text-foreground;\n+    @apply background text-foreground;\n   }\n } \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741640729567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,12 +69,7 @@\n     --radius: 0.5rem;\n   }\n }\n \n-@layer base {\n-  * {\n-    @apply border-0;\n-  }\n-  body {\n-    @apply background text-foreground;\n-  }\n+\n+\n } \n\\ No newline at end of file\n"
                 }
             ],
-            "date": 1741638155239,
+            "date": 1741638358479,
             "name": "Commit-0",
             "content": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n@layer base {\n  :root {\n    --background: 224 71% 4%;\n    --foreground: 213 31% 91%;\n\n    --muted: 223 47% 11%;\n    --muted-foreground: 215.4 16.3% 56.9%;\n\n    --accent: 216 34% 17%;\n    --accent-foreground: 210 40% 98%;\n\n    --popover: 224 71% 4%;\n    --popover-foreground: 215 20.2% 65.1%;\n\n    --border: 216 34% 17%;\n    --input: 216 34% 17%;\n\n    --card: 224 71% 4%;\n    --card-foreground: 213 31% 91%;\n\n    --primary: 210 40% 98%;\n    --primary-foreground: 222.2 47.4% 1.2%;\n\n    --secondary: 222.2 47.4% 11.2%;\n    --secondary-foreground: 210 40% 98%;\n\n    --destructive: 0 63% 31%;\n    --destructive-foreground: 210 40% 98%;\n\n    --ring: 216 34% 17%;\n\n    --radius: 0.5rem;\n  }\n\n  .light {\n    --background: 0 0% 100%;\n    --foreground: 222.2 47.4% 11.2%;\n\n    --muted: 210 40% 96.1%;\n    --muted-foreground: 215.4 16.3% 46.9%;\n\n    --accent: 210 40% 96.1%;\n    --accent-foreground: 222.2 47.4% 11.2%;\n\n    --popover: 0 0% 100%;\n    --popover-foreground: 222.2 47.4% 11.2%;\n\n    --border: 214.3 31.8% 91.4%;\n    --input: 214.3 31.8% 91.4%;\n\n    --card: 0 0% 100%;\n    --card-foreground: 222.2 47.4% 11.2%;\n\n    --primary: 222.2 47.4% 11.2%;\n    --primary-foreground: 210 40% 98%;\n\n    --secondary: 210 40% 96.1%;\n    --secondary-foreground: 222.2 47.4% 11.2%;\n\n    --destructive: 0 100% 50%;\n    --destructive-foreground: 210 40% 98%;\n\n    --ring: 215 20.2% 65.1%;\n\n    --radius: 0.5rem;\n  }\n}\n\n@layer base {\n  * {\n    @apply border-border;\n  }\n  body {\n    @apply bg-background text-foreground;\n  }\n} "
         }

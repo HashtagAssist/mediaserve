@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/page.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1741638736807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741639526613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,15 +5,7 @@\n   return (\n     <div className=\"flex min-h-screen flex-col items-center justify-center p-4 text-center\">\n       <h1 className=\"text-4xl font-bold mb-4\">Willkommen beim Medienserver</h1>\n       <p className=\"text-xl mb-8\">Ihre persönliche Medienbibliothek</p>\n-      <div className=\"flex gap-4\">\n-        <Button asChild>\n-          <Link href=\"/login\">Anmelden</Link>\n-        </Button>\n-        <Button variant=\"outline\" asChild>\n-          <Link href=\"/register\">Registrieren</Link>\n-        </Button>\n-      </div>\n     </div>\n   );\n } \n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1741638736807,
+            "name": "Commit-0",
+            "content": "import Link from 'next/link';\nimport { Button } from '@/components/ui/button';\n\nexport default function Home() {\n  return (\n    <div className=\"flex min-h-screen flex-col items-center justify-center p-4 text-center\">\n      <h1 className=\"text-4xl font-bold mb-4\">Willkommen beim Medienserver</h1>\n      <p className=\"text-xl mb-8\">Ihre persönliche Medienbibliothek</p>\n      <div className=\"flex gap-4\">\n        <Button asChild>\n          <Link href=\"/login\">Anmelden</Link>\n        </Button>\n        <Button variant=\"outline\" asChild>\n          <Link href=\"/register\">Registrieren</Link>\n        </Button>\n      </div>\n    </div>\n  );\n} "
+        }
+    ]
+}

@@ -3,11 +3,23 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1741638155239,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741638853965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n import type { Metadata } from \"next\";\n import { Inter } from \"next/font/google\";\n import \"./globals.css\";\n-import { Providers } from \"./providers\";\n \n const inter = Inter({ subsets: [\"latin\"] });\n \n export const metadata: Metadata = {\n@@ -17,9 +16,9 @@\n }>) {\n   return (\n     <html lang=\"de\" className=\"dark\">\n       <body className={inter.className}>\n-        <Providers>{children}</Providers>\n+        {children}\n       </body>\n     </html>\n   );\n } \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741639146341,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import type { Metadata } from \"next\";\n import { Inter } from \"next/font/google\";\n import \"./globals.css\";\n+import { Providers } from \"./providers\";\n \n const inter = Inter({ subsets: [\"latin\"] });\n \n export const metadata: Metadata = {\n@@ -16,9 +17,9 @@\n }>) {\n   return (\n     <html lang=\"de\" className=\"dark\">\n       <body className={inter.className}>\n-        {children}\n+        <Providers>{children}</Providers>\n       </body>\n     </html>\n   );\n } \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741639723743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n import type { Metadata } from \"next\";\n import { Inter } from \"next/font/google\";\n import \"./globals.css\";\n-import { Providers } from \"./providers\";\n \n const inter = Inter({ subsets: [\"latin\"] });\n \n export const metadata: Metadata = {\n@@ -17,9 +16,9 @@\n }>) {\n   return (\n     <html lang=\"de\" className=\"dark\">\n       <body className={inter.className}>\n-        <Providers>{children}</Providers>\n+        {children}\n       </body>\n     </html>\n   );\n } \n\\ No newline at end of file\n"
                 }
             ],
             "date": 1741638155239,

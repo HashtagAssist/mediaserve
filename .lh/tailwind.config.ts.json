@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1741638155238,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741638853961,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,8 +71,8 @@\n         \"accordion-up\": \"accordion-up 0.2s ease-out\",\n       },\n     },\n   },\n-  plugins: [require(\"tailwindcss-animate\")],\n+  plugins: [],\n };\n \n export default config; \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741640421929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,10 @@\n       colors: {\n         border: \"hsl(var(--border))\",\n         input: \"hsl(var(--input))\",\n         ring: \"hsl(var(--ring))\",\n-        background: \"hsl(var(--background))\",\n-        foreground: \"hsl(var(--foreground))\",\n+        background: \"hsl(var(--background) / <alpha-value>)\",\n+        foreground: \"hsl(var(--foreground) / <alpha-value>)\",\n         primary: {\n           DEFAULT: \"hsl(var(--primary))\",\n           foreground: \"hsl(var(--primary-foreground))\",\n         },\n"
                 }
             ],
             "date": 1741638155238,

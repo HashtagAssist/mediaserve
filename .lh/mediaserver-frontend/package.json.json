@@ -1,0 +1,18 @@
+{
+    "sourceFile": "mediaserver-frontend/package.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741640819394,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741640819394,
+            "name": "Commit-0",
+            "content": "{\n  \"name\": \"mediaserver-frontend\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"scripts\": {\n    \"dev\": \"next dev\",\n    \"build\": \"next build\",\n    \"start\": \"next start\",\n    \"lint\": \"next lint\"\n  },\n  \"dependencies\": {\n    \"@radix-ui/react-label\": \"^2.1.2\",\n    \"@radix-ui/react-slot\": \"^1.1.2\",\n    \"@tanstack/react-query\": \"^5.0.0\",\n    \"axios\": \"^1.8.2\",\n    \"clsx\": \"^2.0.0\",\n    \"framer-motion\": \"^12.4.11\",\n    \"lucide-react\": \"^0.294.0\",\n    \"next\": \"14.0.4\",\n    \"react\": \"^18\",\n    \"react-dom\": \"^18\",\n    \"react-icons\": \"^5.5.0\",\n    \"sonner\": \"^1.2.4\",\n    \"tailwind-merge\": \"^2.1.0\",\n    \"tailwindcss-animate\": \"^1.0.7\",\n    \"zustand\": \"^5.0.3\"\n  },\n  \"devDependencies\": {\n    \"@eslint/eslintrc\": \"^3\",\n    \"@tailwindcss/postcss\": \"^4\",\n    \"@types/node\": \"^20\",\n    \"@types/react\": \"^18\",\n    \"@types/react-dom\": \"^18\",\n    \"autoprefixer\": \"^10.0.1\",\n    \"eslint\": \"^8\",\n    \"eslint-config-next\": \"14.0.4\",\n    \"postcss\": \"^8\",\n    \"tailwindcss\": \"^3.3.0\",\n    \"typescript\": \"^5\"\n  }\n}\n"
+        }
+    ]
+}
