@@ -1,0 +1,18 @@
+{
+    "sourceFile": "components/sidebar.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741638155239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741638155239,
+            "name": "Commit-0",
+            "content": "'use client';\n\nimport { cn } from '@/lib/utils';\nimport { useUIStore } from '@/lib/store';\nimport { Button } from '@/components/ui/button';\nimport Link from 'next/link';\nimport { usePathname } from 'next/navigation';\nimport { \n  Home, \n  Film, \n  Music, \n  Library, \n  Tag, \n  Settings, \n  Menu, \n  X \n} from 'lucide-react';\n\nconst navItems = [\n  { name: 'Dashboard', href: '/', icon: Home },\n  { name: 'Filme', href: '/movies', icon: Film },\n  { name: 'Musik', href: '/music', icon: Music },\n  { name: 'Bibliotheken', href: '/libraries', icon: Library },\n  { name: 'Kategorien', href: '/categories', icon: Tag },\n  { name: 'Einstellungen', href: '/settings', icon: Settings },\n];\n\nexport function Sidebar() {\n  const pathname = usePathname();\n  const { sidebarOpen, toggleSidebar } = useUIStore();\n\n  return (\n    <>\n      <div\n        className={cn(\n          'fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden',\n          sidebarOpen ? 'block' : 'hidden'\n        )}\n        onClick={() => useUIStore.setState({ sidebarOpen: false })}\n      />\n      <aside\n        className={cn(\n          'fixed inset-y-0 left-0 z-50 flex w-64 flex-col bg-card shadow-lg transition-transform duration-300 ease-in-out lg:static lg:translate-x-0',\n          sidebarOpen ? 'translate-x-0' : '-translate-x-full'\n        )}\n      >\n        <div className=\"flex h-16 items-center justify-between px-4 border-b\">\n          <h1 className=\"text-xl font-bold\">Medienserver</h1>\n          <Button\n            variant=\"ghost\"\n            size=\"icon\"\n            className=\"lg:hidden\"\n            onClick={toggleSidebar}\n          >\n            <X className=\"h-5 w-5\" />\n          </Button>\n        </div>\n        <nav className=\"flex-1 overflow-y-auto p-4\">\n          <ul className=\"space-y-2\">\n            {navItems.map((item) => (\n              <li key={item.href}>\n                <Link\n                  href={item.href}\n                  className={cn(\n                    'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',\n                    pathname === item.href\n                      ? 'bg-accent text-accent-foreground'\n                      : 'text-muted-foreground'\n                  )}\n                >\n                  <item.icon className=\"h-5 w-5\" />\n                  {item.name}\n                </Link>\n              </li>\n            ))}\n          </ul>\n        </nav>\n      </aside>\n      <Button\n        variant=\"outline\"\n        size=\"icon\"\n        className=\"fixed bottom-4 right-4 z-50 rounded-full shadow-lg lg:hidden\"\n        onClick={toggleSidebar}\n      >\n        <Menu className=\"h-5 w-5\" />\n      </Button>\n    </>\n  );\n} "
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/(dashboard)/layout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741638155240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741638155240,
+            "name": "Commit-0",
+            "content": "'use client';\n\nimport { Sidebar } from '@/components/sidebar';\nimport { Header } from '@/components/header';\nimport { useAuthStore } from '@/lib/store';\nimport { useRouter } from 'next/navigation';\nimport { useEffect } from 'react';\n\nexport default function DashboardLayout({\n  children,\n}: {\n  children: React.ReactNode;\n}) {\n  const { isAuthenticated } = useAuthStore();\n  const router = useRouter();\n\n  useEffect(() => {\n    if (!isAuthenticated) {\n      router.push('/login');\n    }\n  }, [isAuthenticated, router]);\n\n  return (\n    <div className=\"flex h-screen overflow-hidden\">\n      <Sidebar />\n      <div className=\"flex flex-col flex-1 overflow-hidden\">\n        <Header />\n        <main className=\"flex-1 overflow-y-auto p-4 md:p-6\">{children}</main>\n      </div>\n    </div>\n  );\n} "
+        }
+    ]
+}

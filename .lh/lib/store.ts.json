@@ -1,0 +1,18 @@
+{
+    "sourceFile": "lib/store.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741638155239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741638155239,
+            "name": "Commit-0",
+            "content": "import { create } from 'zustand';\nimport { persist } from 'zustand/middleware';\n\ninterface AuthState {\n  token: string | null;\n  user: any | null;\n  isAuthenticated: boolean;\n  login: (token: string, user: any) => void;\n  logout: () => void;\n  setUser: (user: any) => void;\n}\n\nexport const useAuthStore = create<AuthState>()(\n  persist(\n    (set) => ({\n      token: null,\n      user: null,\n      isAuthenticated: false,\n      login: (token, user) => set({ token, user, isAuthenticated: true }),\n      logout: () => set({ token: null, user: null, isAuthenticated: false }),\n      setUser: (user) => set({ user }),\n    }),\n    {\n      name: 'auth-storage',\n    }\n  )\n);\n\ninterface UIState {\n  sidebarOpen: boolean;\n  toggleSidebar: () => void;\n  setSidebarOpen: (open: boolean) => void;\n}\n\nexport const useUIStore = create<UIState>((set) => ({\n  sidebarOpen: true,\n  toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),\n  setSidebarOpen: (open) => set({ sidebarOpen: open }),\n})); "
+        }
+    ]
+}

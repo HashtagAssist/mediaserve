@@ -1,0 +1,18 @@
+{
+    "sourceFile": "lib/api.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741638155239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741638155239,
+            "name": "Commit-0",
+            "content": "import axios from 'axios';\n\nconst API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';\n\nconst api = axios.create({\n  baseURL: API_URL,\n  headers: {\n    'Content-Type': 'application/json',\n  },\n});\n\n// Request Interceptor für das Hinzufügen des Auth-Tokens\napi.interceptors.request.use(\n  (config) => {\n    const token = localStorage.getItem('token');\n    if (token) {\n      config.headers.Authorization = `Bearer ${token}`;\n    }\n    return config;\n  },\n  (error) => Promise.reject(error)\n);\n\n// Response Interceptor für das Handling von 401 Errors\napi.interceptors.response.use(\n  (response) => response,\n  (error) => {\n    if (error.response?.status === 401) {\n      // Redirect to login page or refresh token\n      localStorage.removeItem('token');\n      window.location.href = '/login';\n    }\n    return Promise.reject(error);\n  }\n);\n\nexport default api;\n\n// Auth API\nexport const authApi = {\n  login: (username: string, password: string) => \n    api.post('/auth/login', { username, password }),\n  register: (username: string, password: string, email: string) => \n    api.post('/auth/register', { username, password, email }),\n  me: () => api.get('/auth/me'),\n};\n\n// Media API\nexport const mediaApi = {\n  getAll: (type?: string) => api.get(`/media${type ? `?type=${type}` : ''}`),\n  getById: (id: string) => api.get(`/media/${id}`),\n  search: (query: string) => api.get(`/media/search?q=${query}`),\n};\n\n// Library API\nexport const libraryApi = {\n  getAll: () => api.get('/libraries'),\n  getById: (id: string) => api.get(`/libraries/${id}`),\n  create: (data: any) => api.post('/libraries', data),\n  update: (id: string, data: any) => api.put(`/libraries/${id}`, data),\n  delete: (id: string) => api.delete(`/libraries/${id}`),\n  scan: (id: string) => api.post(`/scheduler/libraries/${id}/scan`),\n};\n\n// Category API\nexport const categoryApi = {\n  getAll: () => api.get('/categories'),\n  getById: (id: string) => api.get(`/categories/${id}`),\n  create: (data: any) => api.post('/categories', data),\n  update: (id: string, data: any) => api.put(`/categories/${id}`, data),\n  delete: (id: string) => api.delete(`/categories/${id}`),\n}; "
+        }
+    ]
+}
