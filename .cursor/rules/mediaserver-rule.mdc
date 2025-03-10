@@ -1,0 +1,70 @@
+---
+description: 
+globs: 
+---
+# KodiLike-Medienserver
+
+## Projektübersicht
+Ein Medienserver ähnlich wie Kodi mit API-First-Ansatz. Das Projekt besteht aus einem Backend für Medienverwaltung und Streaming sowie verschiedenen Frontend-Clients.
+
+## Architektur
+- **Backend**: API-Server, Medienverwaltung, Datenbank
+- **Frontend**: Web-Client, optional Mobile-Apps und TV-Apps
+- **Design-Prinzip**: API-First, Microservice-orientiert
+
+## Technologie-Stack
+- **Backend**: Node.js mit Express/NestJS
+- **Datenbank**: PostgreSQL für Metadaten
+- **Medienspeicher**: Lokales Dateisystem oder Cloud-Storage
+- **API-Spezifikation**: OpenAPI/Swagger
+- **Authentifizierung**: JWT-basiert
+- **Frontend**: SPA mit React oder Vue.js
+- **Medienverarbeitung**: FFmpeg für Transcoding
+
+## Code-Standards
+- **Sprache**: TypeScript für Backend, TypeScript/JavaScript für Frontend
+- **Formatierung**: ESLint + Prettier
+- **Namenskonventionen**:
+  - camelCase für Variablen und Funktionen
+  - PascalCase für Klassen und Komponenten
+  - UPPER_SNAKE_CASE für Konstanten
+  - kebab-case für API-Endpunkte
+- **Dokumentation**: JSDoc für Code, Swagger für API
+
+## API-Design
+- **Basisstruktur**: REST mit Resource-orientiertem Design
+- **Endpoints**: /api/v1/[resource]
+- **Versionierung**: Über URL-Pfad
+- **Response-Format**:
+  ```json
+  {
+    "status": "success|error",
+    "data": { ... },
+    "message": "Optional Nachricht",
+    "error": "Optional Fehlerdetails"
+  }
+  ```
+
+## Datenmodell
+- **User**: Benutzer mit Auth-Informationen
+- **Media**: Filme, Serien, Musik, etc.
+- **Collection**: Gruppen von Medien
+- **Category**: Genres, Tags
+- **Playlist**: Benutzerdefinierte Listen
+- **History**: Wiedergabeverlauf und Position
+
+## Entwicklungspraktiken
+- **Git-Flow**: Feature-Branches, Pull Requests
+- **Testing**: Unit-Tests (Jest), Integration-Tests für API
+- **CI/CD**: GitHub Actions
+- **Deployment**: Docker-Container
+- **Logs**: Strukturiertes Logging mit Winston/Pino
+- **Monitoring**: Optional mit Prometheus/Grafana
+
+## Typische Anwendungsfälle
+- Medien durchsuchen und filtern
+- Metadaten anzeigen und bearbeiten
+- Medien streamen mit adaptiver Bitrate
+- Wiedergabeverlauf und -fortschritt verfolgen
+- Benutzerprofile und Präferenzen verwalten
+- Playlisten und Sammlungen erstellen

@@ -1,0 +1,34 @@
+import { MediaType } from '../enums/media-type.enum';
+import { Library } from '../../library/entities/library.entity';
+import { Category } from '../../category/entities/category.entity';
+export declare class Media {
+    id: string;
+    title: string;
+    description: string;
+    path: string;
+    relativePath: string;
+    type: MediaType;
+    duration: number;
+    processed: boolean;
+    fileHash: string;
+    thumbnailPath: string;
+    releaseYear: number;
+    director: string;
+    actors: string[];
+    genres: string[];
+    language: string;
+    library: Library;
+    categories: Category[];
+    createdAt: Date;
+    updatedAt: Date;
+    format?: string;
+    fileSize?: number;
+    resolution?: string;
+    codec?: string;
+    frameRate?: string;
+    audioCodec?: string;
+    audioChannels?: number;
+    sampleRate?: string;
+    averageRating: number;
+    ratingCount: number;
+}

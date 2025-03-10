@@ -1,0 +1,204 @@
+2025-03-10T18:52:44.244Z [DEBUG] [MetadataService] FFmpeg ist verfügbar und wird für Metadatenextraktion verwendet.
+2025-03-10T18:52:44.255Z [ERROR] unhandledRejection: crypto is not defined
+ReferenceError: crypto is not defined
+    at SchedulerOrchestrator.addCron (/home/unroot/dev/node_modules/@nestjs/schedule/dist/scheduler.orchestrator.js:90:38)
+    at ScheduleExplorer.lookupSchedulers (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:67:51)
+    at processMethod (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:45:24)
+    at Array.forEach (<anonymous>)
+    at /home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:54:18
+    at Array.forEach (<anonymous>)
+    at ScheduleExplorer.explore (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:39:26)
+    at ScheduleExplorer.onModuleInit (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:32:14)
+    at MapIterator.iteratee (/home/unroot/dev/node_modules/@nestjs/core/hooks/on-module-init.hook.js:22:43)
+    at MapIterator.next (/home/unroot/dev/node_modules/iterare/src/map.ts:9:39)
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+{
+  "error": {},
+  "stack": "ReferenceError: crypto is not defined\n    at SchedulerOrchestrator.addCron (/home/unroot/dev/node_modules/@nestjs/schedule/dist/scheduler.orchestrator.js:90:38)\n    at ScheduleExplorer.lookupSchedulers (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:67:51)\n    at processMethod (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:45:24)\n    at Array.forEach (<anonymous>)\n    at /home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:54:18\n    at Array.forEach (<anonymous>)\n    at ScheduleExplorer.explore (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:39:26)\n    at ScheduleExplorer.onModuleInit (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:32:14)\n    at MapIterator.iteratee (/home/unroot/dev/node_modules/@nestjs/core/hooks/on-module-init.hook.js:22:43)\n    at MapIterator.next (/home/unroot/dev/node_modules/iterare/src/map.ts:9:39)",
+  "rejection": true,
+  "date": "Mon Mar 10 2025 19:52:44 GMT+0100 (Central European Standard Time)",
+  "process": {
+    "pid": 27891,
+    "uid": 1000,
+    "gid": 1000,
+    "cwd": "/home/unroot/dev",
+    "execPath": "/usr/bin/node",
+    "version": "v18.19.1",
+    "argv": [
+      "/usr/bin/node",
+      "/home/unroot/dev/dist/main"
+    ],
+    "memoryUsage": {
+      "rss": 147369984,
+      "heapTotal": 82624512,
+      "heapUsed": 56866088,
+      "external": 3928077,
+      "arrayBuffers": 243668
+    }
+  },
+  "os": {
+    "loadavg": [
+      3.89,
+      3.56,
+      2.6
+    ],
+    "uptime": 86401.7
+  }
+}
+2025-03-10T18:52:44.256Z [ERROR] unhandledRejection: crypto is not defined
+ReferenceError: crypto is not defined
+    at SchedulerOrchestrator.addCron (/home/unroot/dev/node_modules/@nestjs/schedule/dist/scheduler.orchestrator.js:90:38)
+    at ScheduleExplorer.lookupSchedulers (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:67:51)
+    at processMethod (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:45:24)
+    at Array.forEach (<anonymous>)
+    at /home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:54:18
+    at Array.forEach (<anonymous>)
+    at ScheduleExplorer.explore (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:39:26)
+    at ScheduleExplorer.onModuleInit (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:32:14)
+    at MapIterator.iteratee (/home/unroot/dev/node_modules/@nestjs/core/hooks/on-module-init.hook.js:22:43)
+    at MapIterator.next (/home/unroot/dev/node_modules/iterare/src/map.ts:9:39)
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+{
+  "error": {},
+  "stack": "ReferenceError: crypto is not defined\n    at SchedulerOrchestrator.addCron (/home/unroot/dev/node_modules/@nestjs/schedule/dist/scheduler.orchestrator.js:90:38)\n    at ScheduleExplorer.lookupSchedulers (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:67:51)\n    at processMethod (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:45:24)\n    at Array.forEach (<anonymous>)\n    at /home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:54:18\n    at Array.forEach (<anonymous>)\n    at ScheduleExplorer.explore (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:39:26)\n    at ScheduleExplorer.onModuleInit (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:32:14)\n    at MapIterator.iteratee (/home/unroot/dev/node_modules/@nestjs/core/hooks/on-module-init.hook.js:22:43)\n    at MapIterator.next (/home/unroot/dev/node_modules/iterare/src/map.ts:9:39)",
+  "rejection": true,
+  "date": "Mon Mar 10 2025 19:52:44 GMT+0100 (Central European Standard Time)",
+  "process": {
+    "pid": 27891,
+    "uid": 1000,
+    "gid": 1000,
+    "cwd": "/home/unroot/dev",
+    "execPath": "/usr/bin/node",
+    "version": "v18.19.1",
+    "argv": [
+      "/usr/bin/node",
+      "/home/unroot/dev/dist/main"
+    ],
+    "memoryUsage": {
+      "rss": 147369984,
+      "heapTotal": 82624512,
+      "heapUsed": 57103344,
+      "external": 3944525,
+      "arrayBuffers": 260076
+    }
+  },
+  "os": {
+    "loadavg": [
+      3.89,
+      3.56,
+      2.6
+    ],
+    "uptime": 86401.7
+  }
+}
+2025-03-10T18:54:30.901Z [DEBUG] [MetadataService] FFmpeg ist verfügbar und wird für Metadatenextraktion verwendet.
+2025-03-10T18:54:30.910Z [ERROR] unhandledRejection: crypto is not defined
+ReferenceError: crypto is not defined
+    at SchedulerOrchestrator.addCron (/home/unroot/dev/node_modules/@nestjs/schedule/dist/scheduler.orchestrator.js:90:38)
+    at ScheduleExplorer.lookupSchedulers (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:67:51)
+    at processMethod (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:45:24)
+    at Array.forEach (<anonymous>)
+    at /home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:54:18
+    at Array.forEach (<anonymous>)
+    at ScheduleExplorer.explore (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:39:26)
+    at ScheduleExplorer.onModuleInit (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:32:14)
+    at MapIterator.iteratee (/home/unroot/dev/node_modules/@nestjs/core/hooks/on-module-init.hook.js:22:43)
+    at MapIterator.next (/home/unroot/dev/node_modules/iterare/src/map.ts:9:39)
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+{
+  "error": {},
+  "stack": "ReferenceError: crypto is not defined\n    at SchedulerOrchestrator.addCron (/home/unroot/dev/node_modules/@nestjs/schedule/dist/scheduler.orchestrator.js:90:38)\n    at ScheduleExplorer.lookupSchedulers (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:67:51)\n    at processMethod (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:45:24)\n    at Array.forEach (<anonymous>)\n    at /home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:54:18\n    at Array.forEach (<anonymous>)\n    at ScheduleExplorer.explore (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:39:26)\n    at ScheduleExplorer.onModuleInit (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:32:14)\n    at MapIterator.iteratee (/home/unroot/dev/node_modules/@nestjs/core/hooks/on-module-init.hook.js:22:43)\n    at MapIterator.next (/home/unroot/dev/node_modules/iterare/src/map.ts:9:39)",
+  "rejection": true,
+  "date": "Mon Mar 10 2025 19:54:30 GMT+0100 (Central European Standard Time)",
+  "process": {
+    "pid": 28305,
+    "uid": 1000,
+    "gid": 1000,
+    "cwd": "/home/unroot/dev",
+    "execPath": "/usr/bin/node",
+    "version": "v18.19.1",
+    "argv": [
+      "/usr/bin/node",
+      "/home/unroot/dev/dist/main"
+    ],
+    "memoryUsage": {
+      "rss": 147214336,
+      "heapTotal": 81838080,
+      "heapUsed": 57563232,
+      "external": 3972647,
+      "arrayBuffers": 288238
+    }
+  },
+  "os": {
+    "loadavg": [
+      4.1,
+      3.79,
+      2.79
+    ],
+    "uptime": 86508.35
+  }
+}
+2025-03-10T18:54:30.912Z [ERROR] unhandledRejection: crypto is not defined
+ReferenceError: crypto is not defined
+    at SchedulerOrchestrator.addCron (/home/unroot/dev/node_modules/@nestjs/schedule/dist/scheduler.orchestrator.js:90:38)
+    at ScheduleExplorer.lookupSchedulers (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:67:51)
+    at processMethod (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:45:24)
+    at Array.forEach (<anonymous>)
+    at /home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:54:18
+    at Array.forEach (<anonymous>)
+    at ScheduleExplorer.explore (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:39:26)
+    at ScheduleExplorer.onModuleInit (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:32:14)
+    at MapIterator.iteratee (/home/unroot/dev/node_modules/@nestjs/core/hooks/on-module-init.hook.js:22:43)
+    at MapIterator.next (/home/unroot/dev/node_modules/iterare/src/map.ts:9:39)
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+{
+  "error": {},
+  "stack": "ReferenceError: crypto is not defined\n    at SchedulerOrchestrator.addCron (/home/unroot/dev/node_modules/@nestjs/schedule/dist/scheduler.orchestrator.js:90:38)\n    at ScheduleExplorer.lookupSchedulers (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:67:51)\n    at processMethod (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:45:24)\n    at Array.forEach (<anonymous>)\n    at /home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:54:18\n    at Array.forEach (<anonymous>)\n    at ScheduleExplorer.explore (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:39:26)\n    at ScheduleExplorer.onModuleInit (/home/unroot/dev/node_modules/@nestjs/schedule/dist/schedule.explorer.js:32:14)\n    at MapIterator.iteratee (/home/unroot/dev/node_modules/@nestjs/core/hooks/on-module-init.hook.js:22:43)\n    at MapIterator.next (/home/unroot/dev/node_modules/iterare/src/map.ts:9:39)",
+  "rejection": true,
+  "date": "Mon Mar 10 2025 19:54:30 GMT+0100 (Central European Standard Time)",
+  "process": {
+    "pid": 28305,
+    "uid": 1000,
+    "gid": 1000,
+    "cwd": "/home/unroot/dev",
+    "execPath": "/usr/bin/node",
+    "version": "v18.19.1",
+    "argv": [
+      "/usr/bin/node",
+      "/home/unroot/dev/dist/main"
+    ],
+    "memoryUsage": {
+      "rss": 147345408,
+      "heapTotal": 81838080,
+      "heapUsed": 57719712,
+      "external": 3997287,
+      "arrayBuffers": 312838
+    }
+  },
+  "os": {
+    "loadavg": [
+      4.1,
+      3.79,
+      2.79
+    ],
+    "uptime": 86508.35
+  }
+}
+2025-03-10T18:58:35.162Z [DEBUG] [MetadataService] FFmpeg ist verfügbar und wird für Metadatenextraktion verwendet.
+2025-03-10T18:58:35.177Z [DEBUG] [ThumbnailService] Thumbnail-Verzeichnis erstellt: /home/unroot/dev/thumbnails
+2025-03-10T18:58:35.178Z [DEBUG] [SchedulerService] Initialisiere Scheduler für 0 Bibliotheken mit autoScan
+2025-03-10T19:03:59.411Z [DEBUG] [MetadataService] FFmpeg ist verfügbar und wird für Metadatenextraktion verwendet.
+2025-03-10T19:03:59.426Z [DEBUG] [ThumbnailService] Thumbnail-Verzeichnis erstellt: /home/unroot/dev/thumbnails
+2025-03-10T19:03:59.426Z [DEBUG] [SchedulerService] Initialisiere Scheduler für 0 Bibliotheken mit autoScan
+2025-03-10T19:07:33.727Z [DEBUG] [MetadataService] FFmpeg ist verfügbar und wird für Metadatenextraktion verwendet.
+2025-03-10T19:07:33.742Z [DEBUG] [ThumbnailService] Thumbnail-Verzeichnis erstellt: /home/unroot/dev/thumbnails
+2025-03-10T19:07:33.743Z [DEBUG] [SchedulerService] Initialisiere Scheduler für 0 Bibliotheken mit autoScan
+2025-03-10T19:18:40.390Z [DEBUG] [MetadataService] FFmpeg ist verfügbar und wird für Metadatenextraktion verwendet.
+2025-03-10T19:18:40.403Z [DEBUG] [ThumbnailService] Thumbnail-Verzeichnis erstellt: /home/unroot/dev/thumbnails
+2025-03-10T19:18:40.403Z [DEBUG] [SchedulerService] Initialisiere Scheduler für 0 Bibliotheken mit autoScan
+2025-03-10T19:29:20.163Z [DEBUG] [MetadataService] FFmpeg ist verfügbar und wird für Metadatenextraktion verwendet.
+2025-03-10T19:29:20.174Z [DEBUG] [ThumbnailService] Thumbnail-Verzeichnis erstellt: /home/unroot/dev/thumbnails
+2025-03-10T19:29:20.175Z [DEBUG] [SchedulerService] Initialisiere Scheduler für 0 Bibliotheken mit autoScan
+2025-03-10T19:41:38.366Z [DEBUG] [MetadataService] FFmpeg ist verfügbar und wird für Metadatenextraktion verwendet.
+2025-03-10T19:41:38.378Z [DEBUG] [SchedulerService] Initialisiere Scheduler für 0 Bibliotheken mit autoScan
+2025-03-10T19:41:38.386Z [DEBUG] [ThumbnailService] Thumbnail-Verzeichnis erstellt: /home/unroot/dev/thumbnails

@@ -1,0 +1,31 @@
+{
+  "projectName": "KodiLike-Medienserver",
+  "projectDescription": "Ein Medienserver ähnlich wie Kodi mit API-First-Ansatz. Backend für Medienverwaltung und Streaming, Frontend für die Benutzeroberfläche.",
+  "codeStyle": {
+    "language": "JavaScript/TypeScript für Backend, React/Vue für Frontend",
+    "formatting": "Standard ESLint/Prettier-Konfiguration",
+    "naming": {
+      "variables": "camelCase",
+      "functions": "camelCase",
+      "classes": "PascalCase",
+      "constants": "UPPER_SNAKE_CASE",
+      "api": "kebab-case für Endpunkte, camelCase für Parameter"
+    }
+  },
+  "architecture": {
+    "backend": "Node.js mit Express/NestJS, RESTful API",
+    "database": "PostgreSQL für Metadaten, Dateisystem für Medien",
+    "frontend": "SPA mit React oder Vue.js"
+  },
+  "apiStandards": {
+    "specification": "OpenAPI/Swagger",
+    "versioning": "URL-Pfad: /api/v1/...",
+    "responseFormat": "JSON mit konsistenter Struktur",
+    "errorHandling": "Standard HTTP-Statuscodes mit detaillierten Fehlermeldungen"
+  },
+  "development": {
+    "testing": "Jest für Unit-Tests, Supertest für API-Tests",
+    "documentation": "JSDoc für Code, Swagger für API",
+    "ci": "GitHub Actions für CI/CD"
+  }
+} 
